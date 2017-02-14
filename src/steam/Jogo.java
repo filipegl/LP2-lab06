@@ -5,11 +5,37 @@ import java.util.Set;
 
 public class Jogo {
 
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public int getMaxScore() {
+		return maxScore;
+	}
+
+	public int getVezesJogado() {
+		return vezesJogado;
+	}
+
+	public int getVezesZerado() {
+		return vezesZerado;
+	}
+
+
 	private String nome;
 	private double preco;
-	private int maxScore;
+	protected int maxScore;
 	private int vezesJogado;
 	private int vezesZerado;
+
 	private Set<Jogabilidade> jogabilidades;
 	
 	public Jogo(String nome, double preco, Set<Jogabilidade> jogabilidade) throws Exception { 
@@ -34,7 +60,7 @@ public class Jogo {
 		if (maxScore < score){
 			maxScore = score;
 		}
-		return maxScore;
+		return maxScore; //retornar ex2p
 	}
 	
 
