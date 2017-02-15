@@ -1,12 +1,20 @@
 package steam;
 //Possui 10% de desconto em compra de jogos.
 
-//x2p += 10 * precoJogo
-public class Noob extends Usuario {
+public class Noob extends TipoDeUsuario {
 
-	public Noob(String login, String nome) {
-		super(login, nome);
-		int ex2p = 0;
+	public Noob() {
+		this.desconto = 0.1;
+	}
+
+	@Override
+	public double getDesconto() {
+		return this.desconto;
+	}
+
+	@Override
+	public String toString() {
+		return "Noob";
 	}
 
 }

@@ -1,4 +1,4 @@
-package steam;
+/*package steam;
 
 import java.util.Set;
 
@@ -19,4 +19,4 @@ public class Luta extends Jogo {
 		return ex2pLuta;
 	}
 
-}
+}\*
