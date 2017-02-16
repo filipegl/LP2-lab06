@@ -16,7 +16,7 @@ public class Jogo {
 	private Set<Jogabilidade> jogabilidades;
 	
 	
-	public Jogo(String nome, double preco, Set<Jogabilidade> jogabilidade, TipoDeJogo tipo) throws Exception { 
+	public Jogo(String nome, double preco, Set<Jogabilidade> jogabilidade) throws Exception { 
 		if ((nome == null) || (nome.trim().equals(""))){
 			throw new Exception("Nome nao pode ser null ou vazio.");
 		}
@@ -31,11 +31,11 @@ public class Jogo {
 		this.vezesJogado = 0;
 		this.vezesZerado = 0;
 		this.jogabilidades = jogabilidade;
-		this.tipo = tipo;
+		
 	}
 	
 	//Como tenho o método "adicionaJogabilidade", o construtor também pode iniciar sem as jogabilidades.
-	public Jogo(String nome, double preco, TipoDeJogo tipo) throws Exception { 
+	public Jogo(String nome, double preco) throws Exception { 
 		if ((nome == null) || (nome.trim().equals(""))){
 			throw new Exception("Nome nao pode ser null ou vazio.");
 		}
@@ -46,15 +46,26 @@ public class Jogo {
 		}
 		this.preco = preco;
 		
-
-		this.tipo = tipo;
 		this.maxScore = 0;
 		this.vezesJogado = 0;
 		this.vezesZerado = 0;
 	}
 	
-	public int registraJogada(int score, boolean zerou)throws Exception{
-		int ex2p = 0;
+	public boolean registro(int score, boolean zerou){
+		if(maxScore < score){
+			maxScore = score;
+			return true;
+		}else{
+			return false;
+		}
+		if (zerou){
+			vezesZerado += 1;
+		}
+		
+	}
+	
+	public abstract int registraJogada(int score, boolean zerou);
+		/*int ex2p = 0;
 
 		if(zerou){
 			this.vezesZerado ++;
@@ -76,8 +87,8 @@ public class Jogo {
 			ex2p += 20;
 		}
 		
-		return ex2p;
-	}
+		return ex2p;*/
+
 	
 
 	public void adicionaJogabilidade(Jogabilidade jogabilidade) throws Exception { 
@@ -126,14 +137,6 @@ public class Jogo {
 
 	public void setVezesZerado(int vezesZerado) {
 		this.vezesZerado = vezesZerado;
-	}
-
-	public TipoDeJogo getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoDeJogo tipo) {
-		this.tipo = tipo;
 	}
 
 	public Set<Jogabilidade> getJogabilidades() {

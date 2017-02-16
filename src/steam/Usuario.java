@@ -68,7 +68,7 @@ public class Usuario {
 		double precoDescontado = jogo.getPreco() - (jogo.getPreco()*this.tipoDeUsuario.getDesconto());
 	
 		if(existeJogo(jogo)){
-			throw new Exception("Você ja possui esse jogo");
+			throw new Exception("Você já possui esse jogo");
 		}
 		
 		this.dinheiro -= precoDescontado;

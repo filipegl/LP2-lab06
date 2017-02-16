@@ -13,10 +13,7 @@ public class Loja {
 		listaDeUsuarios = new ArrayList<Usuario>();
 	}
 	
-	
-	public void vendeJogos(){
-		
-	}
+
 	public void adicionaUsuario(String login, String nome, String tipoDeJogador) throws Exception { 
 		
 		if ((pesquisarUsuario(login))){
