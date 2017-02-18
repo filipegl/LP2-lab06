@@ -2,6 +2,8 @@ package teste;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,11 +16,13 @@ public class TestLoja {
 
 	Usuario filipe;
 	Loja loja;
+	List<Usuario> lista;
 	
 	@Before
 	public void setUp() throws Exception{
 		filipe = new Veterano("filipegl", "Filipe");
 		loja = new Loja();
+		
 	}
 
 	@Test
@@ -31,8 +35,8 @@ public class TestLoja {
 
 	@Test
 	public void testAdicionarDinheiro() throws Exception {
-		Assert.assertTrue(loja.adicionaUsuario("rebecagl", "Rebeca", "Noob"));
-		Assert.assertTrue(loja.adicionaUsuario("filipegl", "Filipe", "Veterano"));
+		loja.adicionaUsuario("rebecagl", "Rebeca", "Noob");
+		loja.adicionaUsuario("filipegl", "Filipe", "Veterano");
 		
 		try {
 			loja.adicionarDinheiro("filipe", 70);
@@ -50,12 +54,50 @@ public class TestLoja {
 		}
 		
 		loja.adicionarDinheiro("filipegl", 70);
+		lista = loja.getListaDeUsuarios();
+		Assert.assertEquals(lista.get(1).getDinheiro(), 70, 0.0);
 		
 	}
-
+	
 	@Test
-	public void testUpgrade() {
-		fail("Not yet implemented");
+	public void testUpgrade() throws Exception {
+		try {
+			loja.upgrade("filipegl");
+			Assert.fail("Usuario não existe");
+
+		} catch (Exception e) {
+			Assert.assertEquals("Usuario não existe", e.getMessage());
+		}
+		
+		loja.adicionaUsuario("rebecagl", "Rebeca", "Noob");
+		loja.adicionaUsuario("filipegl", "Filipe", "Veterano");
+		
+		try {
+			loja.upgrade("filipegl");
+			Assert.fail("O usuário já é veterano");
+
+		} catch (Exception e) {
+			Assert.assertEquals("O usuário já é veterano", e.getMessage());
+		}
+		
+		try {
+			loja.upgrade("rebecagl");
+			Assert.fail("Pontuação deve ser igual ou maior que 1000");
+
+		} catch (Exception e) {
+			Assert.assertEquals("Pontuação deve ser igual ou maior que 1000", e.getMessage());
+		}
+		
+		lista = loja.getListaDeUsuarios();
+		lista.get(0).setEx2p(1010);
+		
+		loja.upgrade("rebecagl");
+		
+		Assert.assertTrue(lista.get(1).toString().equals("Veterano")); 
+		//como ela foi excluida da lista e adicionada novamente, a sua nova posição deixa de ser 0 e passa a ser 1.
+		
+		
+		
 	}
 
 	@Test

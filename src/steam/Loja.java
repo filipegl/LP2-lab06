@@ -54,7 +54,7 @@ public class Loja {
 		
 		for (int i=0; i < listaDeUsuarios.size(); i++){
 			if (listaDeUsuarios.get(i).getLogin().equals(login)){
-				int index = i;
+				index = i;
 				return true;
 			}
 		}
@@ -75,7 +75,7 @@ public class Loja {
 			throw new Exception("O usuário já é veterano");
 		}
 		
-		//processo de guardar os dados nas variáveis.
+		//guardar os dados nas variáveis.
 		String newNome = noob.getNome();
 		String newLogin = noob.getLogin();
 		double newDinheiro = noob.getDinheiro();
@@ -161,6 +161,14 @@ Jogo jogo;
 			
 		}
 		
+	}
+
+	public List<Usuario> getListaDeUsuarios() {
+		return listaDeUsuarios;
+	}
+
+	public void setListaDeUsuarios(List<Usuario> listaDeUsuarios) {
+		this.listaDeUsuarios = listaDeUsuarios;
 	}
 	
 }
