@@ -83,7 +83,6 @@ public class Usuario {
 	 * Esse preço descontado é subtraido do dinheiro do usuário e somado na variável "dispesaJogos"
 	 * Quando a compra é realizada, o usuário ganha ex2p dependendo do seu tipo. Para diferenciar os tipos, faz-se o uso do toString
 	 * 
-	 * 
 	 * @param jogo Jogo a ser comprado
 	 * @return
 	 * @throws Exception
