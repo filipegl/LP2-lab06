@@ -1,15 +1,12 @@
 package steam;
 //Possui 20% de desconto em compra de jogos
 
-public class Veterano extends TipoDeUsuario {
+public class Veterano extends Usuario {
 
-	public Veterano() throws Exception{
+	public Veterano(String login, String nome) throws Exception{
+		super(login, nome);
 		this.desconto = 0.2;
-	}
-
-	@Override
-	public double getDesconto() {
-		return this.desconto;
+		this.ex2p = 1000;
 	}
 
 	@Override

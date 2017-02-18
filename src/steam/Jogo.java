@@ -1,70 +1,79 @@
 package steam;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 
-public class Jogo {
+public abstract class Jogo {
 
 	
 	private String nome;
 	private double preco;
-	protected int maxScore;
+	private int maxScore;
 	private int vezesJogado;
 	private int vezesZerado;
-	private TipoDeJogo tipo;
 	private Set<Jogabilidade> jogabilidades;
 	
 	
 	public Jogo(String nome, double preco, Set<Jogabilidade> jogabilidade) throws Exception { 
 		if ((nome == null) || (nome.trim().equals(""))){
-			throw new Exception("Nome nao pode ser null ou vazio.");
+			throw new Exception("Nome não pode ser null ou vazio.");
 		}
 		this.nome = nome;
 		
 		if (preco <= 0){
-			throw new Exception("Preco nao pode ser menor ou igual a 0");
+			throw new Exception("Preco não pode ser menor ou igual a 0");
 		}
 		this.preco = preco;
+		
+		if (jogabilidade == null){
+			throw new Exception("Jogabilidade não pode ser null.");
+		}
+		this.jogabilidades = jogabilidade;
 		
 		this.maxScore = 0;
 		this.vezesJogado = 0;
 		this.vezesZerado = 0;
-		this.jogabilidades = jogabilidade;
-		
 	}
 	
 	//Como tenho o método "adicionaJogabilidade", o construtor também pode iniciar sem as jogabilidades.
 	public Jogo(String nome, double preco) throws Exception { 
 		if ((nome == null) || (nome.trim().equals(""))){
-			throw new Exception("Nome nao pode ser null ou vazio.");
+			throw new Exception("Nome não pode ser null ou vazio.");
 		}
 		this.nome = nome;
 		
 		if (preco <= 0){
-			throw new Exception("Preco nao pode ser menor ou igual a 0");
+			throw new Exception("Preco não pode ser menor ou igual a 0");
 		}
 		this.preco = preco;
 		
+		jogabilidades = new HashSet<Jogabilidade>();
 		this.maxScore = 0;
 		this.vezesJogado = 0;
 		this.vezesZerado = 0;
 	}
 	
-	public boolean registro(int score, boolean zerou){
+	protected boolean registro(int score, boolean zerou){
+		if (zerou){
+			vezesZerado += 1;
+		}
+		
 		if(maxScore < score){
 			maxScore = score;
 			return true;
 		}else{
 			return false;
 		}
-		if (zerou){
-			vezesZerado += 1;
-		}
-		
 	}
 	
-	public abstract int registraJogada(int score, boolean zerou);
+	//public int aumentaEx2p(int exp2){
+	//	return exp2;
+		
+	//}
+	
+	public abstract int registraJogada(int score, boolean zerou) throws Exception;
 		/*int ex2p = 0;
 
 		if(zerou){
@@ -91,12 +100,13 @@ public class Jogo {
 
 	
 
-	public void adicionaJogabilidade(Jogabilidade jogabilidade) throws Exception { 
+	public boolean adicionaJogabilidade(Jogabilidade jogabilidade){ 
 		
 		if (jogabilidades.contains(jogabilidade)){
-			throw new Exception("Jogabilidade " + jogabilidade + " já existe");
+			return false;
 		}
 		jogabilidades.add(jogabilidade);
+		return true;
 	}
 	
 	public String getNome() {
@@ -157,7 +167,6 @@ public class Jogo {
 		long temp;
 		temp = Double.doubleToLongBits(preco);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		result = prime * result + vezesJogado;
 		result = prime * result + vezesZerado;
 		return result;
@@ -186,19 +195,11 @@ public class Jogo {
 			return false;
 		if (Double.doubleToLongBits(preco) != Double.doubleToLongBits(other.preco))
 			return false;
-		if (tipo != other.tipo)
-			return false;
 		if (vezesJogado != other.vezesJogado)
 			return false;
 		if (vezesZerado != other.vezesZerado)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Nome do jogo: " + nome + ".\npreco: " + preco + ".\nMáximo score: " + maxScore + ".\nQuantidade de vezes jogado: " + vezesJogado
-				+ ".\nQuantidade de vezes zerado: " + vezesZerado + ".\nTipo de jogo: " + tipo + ".";
 	}
 
 
