@@ -77,8 +77,6 @@ public class TestJogo {
 		} catch (Exception e) {
 			Assert.assertEquals("Jogabilidade não pode ser null.", e.getMessage());
 		}
-		
-		
 	}
 
 	@Test
@@ -117,7 +115,6 @@ public class TestJogo {
 		} catch (Exception e) {
 			Assert.assertEquals("Preco não pode ser menor ou igual a 0", e.getMessage());
 		}
-		
 	}
 
 	@Test
@@ -144,7 +141,7 @@ public class TestJogo {
 		
 		//para Luta:
 		
-		Assert.assertEquals(jLuta.registraJogada(40000, true), 40);
+		Assert.assertEquals(jLuta.registraJogada(47000, true), 47);
 		Assert.assertEquals(jLuta.registraJogada(20000, true), 0);
 		Assert.assertEquals(jLuta.registraJogada(70000, false), 70);
 		
@@ -172,7 +169,6 @@ public class TestJogo {
 		Assert.assertEquals(jPlat.registraJogada(1000, true), 20);
 	}
 
-	
 	@Test
 	public void testAdicionaJogabilidade() throws Exception {
 		
@@ -183,7 +179,6 @@ public class TestJogo {
 		
 		Assert.assertFalse(jPlat.adicionaJogabilidade(Jogabilidade.COMPETITIVO));
 	}
-
 
 	@Test
 	public void testEqualsObject() throws Exception {
@@ -207,5 +202,4 @@ public class TestJogo {
 		Assert.assertEquals(jPlat.toString(), "Plataforma");
 		Assert.assertEquals(jLuta.toString(), "Luta");
 	}
-
 }

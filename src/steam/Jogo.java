@@ -1,12 +1,16 @@
 package steam;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * "Jogo" é uma classe do tipo abstract que faz o uso de herança tendo com 'filhas' as classes "RPG", "Plataforma" e "Luta"
+ *
+ * @author filipe
+ *
+ */
 
 public abstract class Jogo {
-
 	
 	private String nome;
 	private double preco;
@@ -15,6 +19,14 @@ public abstract class Jogo {
 	private int vezesZerado;
 	private Set<Jogabilidade> jogabilidades;
 	
+	/** O construtor desta classe faz uso da sobrecarga, possuindo mais de um modo de ser chamado.
+	 * Uma delas é com o HashSet de jogabilidades, e a outra é sem jogabilidade, adicionando-as em outro momento. 
+	 * 
+	 * @param nome Nome do jogo
+	 * @param preco Preço do jogo
+	 * @param jogabilidade HashSet de jogabilidades
+	 * @throws Exception
+	 */
 	
 	public Jogo(String nome, double preco, Set<Jogabilidade> jogabilidade) throws Exception { 
 		if ((nome == null) || (nome.trim().equals(""))){
@@ -37,7 +49,12 @@ public abstract class Jogo {
 		this.vezesZerado = 0;
 	}
 	
-	//Como tenho o método "adicionaJogabilidade", o construtor também pode iniciar sem as jogabilidades.
+	/**
+	 * Como tenho o método "adicionaJogabilidade", este construtor inicia com um HashSet vazio de jogabilidades.
+	 * @param nome Nome do jogo
+	 * @param preco Preço do jogo
+	 * @throws Exception
+	 */
 	public Jogo(String nome, double preco) throws Exception { 
 		if ((nome == null) || (nome.trim().equals(""))){
 			throw new Exception("Nome não pode ser null ou vazio.");
@@ -55,6 +72,15 @@ public abstract class Jogo {
 		this.vezesZerado = 0;
 	}
 	
+	/**
+	 * O metodo "registro" faz a atualização do Score Máximo (maxScore) e da quantidade de vezes que o usuário
+	 * zerou o jogo (vezesZerado). 
+	 * Se o score for máximo, retorna verdadeiro, se não retorna falso.
+	 * 
+	 * @param score Pontuação em que o jogador fez naquela jogada
+	 * @param zerou Se o jogador zerou, "zerou = true" se não "zerou = false"
+	 * @return
+	 */
 	protected boolean registro(int score, boolean zerou){
 		if (zerou){
 			vezesZerado += 1;
@@ -68,38 +94,14 @@ public abstract class Jogo {
 		}
 	}
 	
-	//public int aumentaEx2p(int exp2){
-	//	return exp2;
-		
-	//}
-	
 	public abstract int registraJogada(int score, boolean zerou) throws Exception;
-		/*int ex2p = 0;
 
-		if(zerou){
-			this.vezesZerado ++;
-		}
-		if(score > maxScore){
-			if(tipo.equals(TipoDeJogo.LUTA) && score > 100000){
-				throw new Exception("Score de Luta deve ser menor ou igual a 100000");
-			}
-			this.maxScore = score;	
-		} 
-		
-		if(this.tipo.equals(TipoDeJogo.RPG)){
-			ex2p+=10;
-		}
-		else if(this.tipo.equals(TipoDeJogo.LUTA)){
-			ex2p = (int) ((double)(ex2p) + (double)(maxScore/1000));
-		}
-		else if(this.tipo.equals(TipoDeJogo.PLATAFORMA) && zerou){
-			ex2p += 20;
-		}
-		
-		return ex2p;*/
-
-	
-
+	/**
+	 * Este metodo serve para caso o jogo precise de jogabilidades adicionais.
+	 * Retorna falso se a jogabilidade passada como argumento já existir no jogo. Caso contrário retorna verdadeiro.
+	 * @param jogabilidade Constante do Enum Jogabilidade
+	 * @return
+	 */
 	public boolean adicionaJogabilidade(Jogabilidade jogabilidade){ 
 		
 		if (jogabilidades.contains(jogabilidade)){
@@ -201,7 +203,4 @@ public abstract class Jogo {
 			return false;
 		return true;
 	}
-
-
-	
 }

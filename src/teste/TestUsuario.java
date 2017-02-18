@@ -27,7 +27,6 @@ public class TestUsuario {
 		veter = new Veterano("rebecagl","Rebeca");
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testUsuario() {
 		//Como nesse caso os construtores das classes filhas são iguais, só irei testar apenas 1 classe filha,
@@ -66,12 +65,9 @@ public class TestUsuario {
 		}
 		
 		//descontos inicializados no construtor para Noob e Veterano
-		Assert.assertEquals(0.1,(noob.getDesconto()), 0.0);
-		Assert.assertEquals(0.2,(veter.getDesconto()), 0.0);
-		
-		
+		Assert.assertEquals(0.9,(noob.getDesconto()), 0.0);
+		Assert.assertEquals(0.8,(veter.getDesconto()), 0.0);
 	}
-	
 
 	@Test
 	public void testRegistraJogada() throws Exception {
@@ -92,8 +88,7 @@ public class TestUsuario {
 		Assert.assertEquals(noob.getEx2p(), 20);
 		
 		noob.registraJogada("Mario",20, true);
-		Assert.assertEquals(noob.getEx2p(), 40); //20 + 20 = 40
-		
+		Assert.assertEquals(noob.getEx2p(), 40); //20 + 20 = 40		
 	}
 
 	@Test
@@ -123,7 +118,7 @@ public class TestUsuario {
 		jogador1.setListaJogos(lista);
 	
 		
-		Assert.assertFalse(jogador1.compraJogos(jogo1));
+		Assert.assertFalse(jogador1.compraJogos(jogo1)); //Jogo já comprado
 		Assert.assertTrue(jogador1.compraJogos(jogo2));
 		Assert.assertTrue(jogador2.compraJogos(jogo1));
 		
@@ -133,7 +128,6 @@ public class TestUsuario {
 		Assert.assertEquals(jogador2.getDispesaJogos(), 4.0, 0.0); //5 - (5*0.2) = 4.0
 		Assert.assertEquals(jogador2.getEx2p(), 1060); // 4.0 * 15 = 60. Como o veterano começa com 1000
 		//60 + 1000 = 1060
-		
 	}
 
 	@Test
@@ -146,14 +140,11 @@ public class TestUsuario {
 		Assert.assertTrue(j1.equals(noob));
 		Assert.assertFalse(j1.equals(j2));
 		Assert.assertTrue(j2.equals(veter));
-		
 	}
-
+	
 	@Test
 	public void testToString() {
 		Assert.assertEquals(noob.toString(), "Noob");
 		Assert.assertEquals(veter.toString(), "Veterano");
-		
 	}
-
 }
